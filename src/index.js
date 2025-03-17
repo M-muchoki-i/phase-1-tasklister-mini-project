@@ -1,42 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
   // your code here
-  const form = document.getElementById("create-task-form");
-  form.addEventListener("submit", function (event) {
+  const toDoList = [];
+
+  const taskForm = document.querySelector("#create-task-form");
+  taskForm.addEventListener("submit", (event) => {
     event.preventDefault();
+    // console.log(taskForm)
+    const taskinput = document.getElementById("new-task-description");
+    // console.log(taskinput)
+
+    toDoList.push(taskinput.value.trim());
+    // console.log(toDoList);
+
+    taskForm.reset();
+    // auto-clear
+    // createTaskForm.reset();
+    displayToDoList(toDoList);
   });
-
-  const button = document.getElementById("submit");
-  // const newTaskDescription = getElementById("new-task-description");
-
-  button.addEventListener("click", function () {
-    console.log("button clicked!");
-  });
-  
-  const list = ["read js", "do labs", "clean"];
-  list.push("touch some grass");
-  console.log(list);
-
-  
-  list.forEach((task) => {
-    console.log(task);
-  });
-
-  
-  // const taskArray = [];
-
-  
- 
-  const taskArray = [];
-  // function createTaskList(task)
-  const newTaskList = [];
-  const submitTask = document.querySelector("#tasks");
-    submitTask.addEventListener("click", () => {
-      const description = document.getElementById("input-description").value;
-      console.log(description);
-    newTaskList.push()
-  });
-
-  //  myform.addEventListener("submit", function (event) {
-  //    event.preventDefault();
-  //  });
 });
+   
+  function displayToDoList(toDos) {
+    unorderedListElement = document.getElementById("tasks");
+
+    unorderedListElement.innerHTML = "";
+    
+    toDos.forEach((toDo) => {
+      const li = document.createElement("li");
+      li.textContent = toDo;
+      // unorderedListElement.appendChild(li);
+
+     const deleteButton = document.createElement("button");
+      deleteButton.textContent = "x";
+      deleteButton.addEventListener("click", () => {
+        // li.remove()
+
+        toDos = toDos.filter((item) => item !== toDo);
+        displayToDoList(toDos);
+        
+       
+      });
+       li.appendChild(deleteButton);
+      unorderedListElement.appendChild(li);
+    });
+  }
+  
