@@ -15,32 +15,28 @@ document.addEventListener("DOMContentLoaded", () => {
     taskForm.reset();
     // auto-clear
     // createTaskForm.reset();
-    displayToDoList(toDoList);
+    renderToDoList(toDoList);
   });
 });
-   
-  function displayToDoList(toDos) {
-    unorderedListElement = document.getElementById("tasks");
 
-    unorderedListElement.innerHTML = "";
-    
-    toDos.forEach((toDo) => {
-      const li = document.createElement("li");
-      li.textContent = toDo;
-      // unorderedListElement.appendChild(li);
+function renderToDoList(toDos) {
+  const unorderedListElement = document.getElementById("tasks");
+  unorderedListElement.innerHTML = "";
 
-     const deleteButton = document.createElement("button");
-      deleteButton.textContent = "x";
-      deleteButton.addEventListener("click", () => {
-        // li.remove()
+  toDos.forEach((toDo) => {
+    const li = document.createElement("li");
+    li.textContent = toDo;
+    // unorderedListElement.appendChild(li);
 
-        toDos = toDos.filter((item) => item !== toDo);
-        displayToDoList(toDos);
-        
-       
-      });
-       li.appendChild(deleteButton);
-      unorderedListElement.appendChild(li);
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "x";
+    deleteButton.addEventListener("click", () => {
+      // li.remove()
+
+      toDos = toDos.filter((item) => item !== toDo);
+      renderToDoList(toDos);
     });
-  }
-  
+    li.appendChild(deleteButton);
+    unorderedListElement.appendChild(li);
+  });
+}
